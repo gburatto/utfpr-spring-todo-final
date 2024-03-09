@@ -28,4 +28,11 @@ public class TaskIT {
 
   }
 
+  @Test
+  public void createTask_WithInvalidData_ReturnsUnprocessableEntity() {
+    ResponseEntity<Object> response = restTemplate.postForEntity("/tasks", TaskConstants.TASK_INVALID, Object.class);
+
+    Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
+  }
+
 }
