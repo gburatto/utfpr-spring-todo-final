@@ -26,7 +26,7 @@ public class UserController {
 
     if (userModel != null) {
       // throw new RuntimeException("Username already exists");
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+      return ResponseEntity.status(HttpStatus.CONFLICT).body(
           Collections.singletonMap("error", "Username already exists"));
     }
 
