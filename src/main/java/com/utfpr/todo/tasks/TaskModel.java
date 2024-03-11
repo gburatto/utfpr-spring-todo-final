@@ -1,7 +1,8 @@
 package com.utfpr.todo.tasks;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,29 +23,29 @@ public class TaskModel {
 
   @Id
   @GeneratedValue(generator = "UUID")
-  private UUID id;
+  private String id;
 
-  // private UUID userId;
+  private String userId;
 
-  // @Column(nullable = false)
   @NotBlank
+  @Column(nullable = false)
   private String title;
 
-  // @Column(nullable = false)
   @NotBlank
+  @Column(nullable = false)
   private String description;
+
+  @NotBlank
+  @Column(nullable = false)
+  private String priority;
 
   private boolean completed;
 
-  // @Column(nullable = false)
-  @NotBlank
-  private String priority;
-
-  // private LocalDateTime startAt;
+  private LocalDateTime startAt;
 
   private LocalDateTime endAt;
 
-  // @CreationTimestamp
+  @CreationTimestamp
   private LocalDateTime createdAt;
 
 }

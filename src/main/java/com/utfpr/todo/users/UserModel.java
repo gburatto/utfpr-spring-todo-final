@@ -1,7 +1,6 @@
 package com.utfpr.todo.users;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -19,7 +18,7 @@ public class UserModel {
 
   @Id
   @GeneratedValue(generator = "UUID")
-  private UUID id;
+  private String id;
 
   private String username;
   private String name;

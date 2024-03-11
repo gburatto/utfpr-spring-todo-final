@@ -1,7 +1,5 @@
 package com.utfpr.todo.tasks;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,7 +15,7 @@ public class TaskService {
     return taskRepository.save(task);
   }
 
-  public TaskModel complete(UUID id) {
+  public TaskModel complete(String id) {
 
     TaskModel task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
 

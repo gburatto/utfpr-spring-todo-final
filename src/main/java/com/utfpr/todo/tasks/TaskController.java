@@ -1,7 +1,5 @@
 package com.utfpr.todo.tasks;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +29,7 @@ public class TaskController {
   }
 
   @PatchMapping("/{id}/complete")
-  public ResponseEntity<?> complete(@PathVariable UUID id) {
+  public ResponseEntity<?> complete(@PathVariable String id) {
 
     TaskModel updatedTask = taskService.complete(id);
 

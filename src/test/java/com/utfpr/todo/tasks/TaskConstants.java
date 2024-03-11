@@ -20,7 +20,7 @@ public class TaskConstants {
                         .build();
 
         public static final TaskModel TASK_CREATED = TaskModel.builder()
-                        .id(UUID.randomUUID())
+                        .id(UUID.randomUUID().toString())
                         .title(TITLE)
                         .description(DESCRIPTION)
                         .completed(COMPLETED)

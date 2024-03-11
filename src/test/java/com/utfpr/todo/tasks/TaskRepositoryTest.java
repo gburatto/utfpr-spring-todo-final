@@ -32,14 +32,16 @@ public class TaskRepositoryTest {
 
   }
 
-  // @Test
-  // public void createTask_WithInvalidData_ThrowsException() {
+  @Test
+  public void createTask_WithInvalidData_ThrowsException() {
 
-  // TaskModel emptyTask = TaskConstants.TASK_EMPTY;
+    TaskModel emptyTask = TaskConstants.TASK_EMPTY;
+    TaskModel invalidTask = TaskConstants.TASK_INVALID;
 
-  // Assertions.assertThatThrownBy(() ->
-  // taskRepository.save(emptyTask)).isInstanceOf(RuntimeException.class);
+    Assertions.assertThatThrownBy(() -> taskRepository.save(emptyTask)).isInstanceOf(RuntimeException.class);
 
-  // }
+    Assertions.assertThatThrownBy(() -> taskRepository.save(invalidTask)).isInstanceOf(RuntimeException.class);
+
+  }
 
 }
