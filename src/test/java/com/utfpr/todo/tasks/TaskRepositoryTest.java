@@ -3,17 +3,18 @@ package com.utfpr.todo.tasks;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+//import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
 
-@DataJpaTest
+@SpringBootTest
 public class TaskRepositoryTest {
 
   @Autowired
   private TaskRepository taskRepository;
 
-  @Autowired
-  private TestEntityManager testEntityManager;
+  //@Autowired
+  //private TestEntityManager testEntityManager;
 
   @Test
   public void createTask_WithDataValid_ReturnsTask() {
@@ -23,7 +24,9 @@ public class TaskRepositoryTest {
     System.out.println("createdTask");
     System.out.println(createdTask);
 
-    TaskModel foundTask = testEntityManager.find(TaskModel.class, createdTask.getId());
+    //TaskModel foundTask = testEntityManager.find(TaskModel.class, createdTask.getId());
+
+    TaskModel foundTask = taskRepository.findById(createdTask.getId()).get();
 
     System.out.println("foundTask");
     System.out.println(foundTask);
@@ -32,16 +35,16 @@ public class TaskRepositoryTest {
 
   }
 
-  // @Test
-  // public void createTask_WithInvalidData_ThrowsException() {
+  @Test
+  public void createTask_WithInvalidData_ThrowsException() {
 
-  //   TaskModel emptyTask = TaskConstants.TASK_EMPTY;
-  //   TaskModel invalidTask = TaskConstants.TASK_INVALID;
+    TaskModel emptyTask = TaskConstants.TASK_EMPTY;
+    TaskModel invalidTask = TaskConstants.TASK_INVALID;
 
-  //   Assertions.assertThatThrownBy(() -> taskRepository.save(emptyTask)).isInstanceOf(RuntimeException.class);
+    Assertions.assertThatThrownBy(() -> taskRepository.save(emptyTask)).isInstanceOf(RuntimeException.class);
 
-  //   Assertions.assertThatThrownBy(() -> taskRepository.save(invalidTask)).isInstanceOf(RuntimeException.class);
+    Assertions.assertThatThrownBy(() -> taskRepository.save(invalidTask)).isInstanceOf(RuntimeException.class);
 
-  // }
+  }
 
 }
