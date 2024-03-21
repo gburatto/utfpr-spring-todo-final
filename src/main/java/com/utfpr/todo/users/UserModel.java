@@ -3,6 +3,7 @@ package com.utfpr.todo.users;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,7 +18,8 @@ import lombok.Data;
 public class UserModel {
 
   @Id
-  @GeneratedValue(generator = "UUID")
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
   private String id;
 
   private String username;

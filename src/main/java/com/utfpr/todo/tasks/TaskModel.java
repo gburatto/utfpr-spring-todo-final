@@ -3,6 +3,7 @@ package com.utfpr.todo.tasks;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +23,8 @@ import lombok.NoArgsConstructor;
 public class TaskModel {
 
   @Id
-  @GeneratedValue(generator = "UUID")
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
   private String id;
 
   private String userId;
