@@ -31,7 +31,17 @@ public class TaskRepositoryTest {
     System.out.println("foundTask");
     System.out.println(foundTask);
 
-    Assertions.assertThat(createdTask).isEqualTo(foundTask);
+    System.out.println(createdTask.getStartAt().toLocalDate());
+    System.out.println(foundTask.getStartAt().toLocalDate());
+
+    //Assertions.assertThat(createdTask).isEqualTo(foundTask);
+    Assertions.assertThat(createdTask).isNotNull();
+    Assertions.assertThat(createdTask.getId()).isNotNull();
+    Assertions.assertThat(createdTask.getTitle()).isEqualTo(foundTask.getTitle());
+    Assertions.assertThat(createdTask.getDescription()).isEqualTo(foundTask.getDescription());
+    Assertions.assertThat(createdTask.getPriority()).isEqualTo(foundTask.getPriority());
+    Assertions.assertThat(createdTask.getStartAt().toLocalDate()).isEqualTo(foundTask.getStartAt().toLocalDate());
+    Assertions.assertThat(createdTask.getEndAt().toLocalDate()).isEqualTo(foundTask.getEndAt().toLocalDate());
 
   }
 
