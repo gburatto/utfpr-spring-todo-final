@@ -28,7 +28,6 @@ public class GeneralExceptionHandler {
     return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errors);
   }
 
-
   @ExceptionHandler(ValidationException.class)
   public ResponseEntity<?> handleValidationExceptions(ValidationException ex) {
     
