@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.utfpr.todo.exceptions.NotFoundException;
 import com.utfpr.todo.exceptions.ValidationException;
 
 import java.util.Collections;
@@ -36,4 +37,14 @@ public class GeneralExceptionHandler {
     );
 
   }
+
+  @ExceptionHandler(NotFoundException.class)
+  public ResponseEntity<?> handleNotFoundExceptions(NotFoundException ex) {
+    
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+        Collections.singletonMap("error", ex.getMessage())
+    );
+
+  }
+  
 }

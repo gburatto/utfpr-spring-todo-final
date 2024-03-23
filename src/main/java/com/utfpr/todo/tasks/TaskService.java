@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.utfpr.todo.exceptions.NotFoundException;
 import com.utfpr.todo.exceptions.ValidationException;
 
 @Service
@@ -42,7 +43,7 @@ public class TaskService {
 
   public TaskModel complete(String id) {
 
-    TaskModel task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+    TaskModel task = taskRepository.findById(id).orElseThrow(() -> new NotFoundException("Task not found"));
 
     task.setCompleted(true);
 
