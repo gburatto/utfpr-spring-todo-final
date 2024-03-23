@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.utfpr.todo.users.UserConstants;
+import com.utfpr.todo.users.UserRepository;
 
 @WebMvcTest(TaskController.class)
 public class TaskControllerTest {
@@ -23,17 +25,23 @@ public class TaskControllerTest {
   @MockBean
   private TaskService taskService;
 
+  @MockBean
+  private UserRepository userRepository;
+
   @Autowired
   private ObjectMapper objectMapper;
 
   @Test
   public void createTask_WithDataValid_ReturnsCreated() throws JsonProcessingException, Exception {
 
-    Mockito.when(taskService.create(TaskConstants.TASK_INPUT_DTO)).thenReturn(TaskConstants.TASK_OUTPUT_DTO);
+    Mockito.when(userRepository.findByUsername(UserConstants.USERNAME)).thenReturn(UserConstants.USER);
+
+    Mockito.when(taskService.create(TaskConstants.TASK_INPUT_DTO, UserConstants.USER_ID)).thenReturn(TaskConstants.TASK_OUTPUT_DTO);
 
     mockMvc.perform(
         post("/tasks")
             .contentType("application/json")
+            .header("Authorization", UserConstants.AUTH_HEADER)
             .content(objectMapper.writeValueAsString(TaskConstants.TASK)))
         .andExpect(status().isCreated())
         .andExpect(content().json(objectMapper.writeValueAsString(TaskConstants.TASK_OUTPUT_DTO)));

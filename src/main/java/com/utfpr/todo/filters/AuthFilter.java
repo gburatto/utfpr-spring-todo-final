@@ -70,6 +70,10 @@ public class AuthFilter extends OncePerRequestFilter {
             return;
         }
 
+        System.out.println(user.getId());
+
+        request.setAttribute("userId", user.getId());
+
         filterChain.doFilter(request, response);
 
     }

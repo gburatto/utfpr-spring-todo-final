@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskMapper {
     
-    public TaskModel fromInput(TaskInputDTO input) {
+    public TaskModel fromInput(TaskInputDTO input, String userId) {
 
         return TaskModel.builder()
-            .userId(input.getUserId())
+            .userId(userId)
             .title(input.getTitle())
             .description(input.getDescription())
             .priority(input.getPriority())
@@ -23,6 +23,7 @@ public class TaskMapper {
 
         return TaskOutputDTO.builder()
             .id(taskModel.getId())
+            .userId(taskModel.getUserId())
             .title(taskModel.getTitle())
             .description(taskModel.getDescription())
             .priority(taskModel.getPriority())

@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.utfpr.todo.exceptions.ValidationException;
+import com.utfpr.todo.users.UserConstants;
 
 @ExtendWith(MockitoExtension.class)
 public class TaskServiceTest {
@@ -26,7 +27,7 @@ public class TaskServiceTest {
   @Test
   public void createTask_WithValidData_ReturnsTask() {
 
-    Mockito.when(taskMapper.fromInput(TaskConstants.TASK_INPUT_DTO))
+    Mockito.when(taskMapper.fromInput(TaskConstants.TASK_INPUT_DTO, UserConstants.USER_ID))
                 .thenReturn(TaskConstants.TASK);
 
     Mockito.when(taskRepository.save(TaskConstants.TASK)).thenReturn(TaskConstants.TASK_CREATED);
@@ -34,7 +35,7 @@ public class TaskServiceTest {
     Mockito.when(taskMapper.fromModel(TaskConstants.TASK_CREATED))
                 .thenReturn(TaskConstants.TASK_OUTPUT_DTO);
 
-    TaskOutputDTO createdTask = taskService.create(TaskConstants.TASK_INPUT_DTO);
+    TaskOutputDTO createdTask = taskService.create(TaskConstants.TASK_INPUT_DTO, UserConstants.USER_ID);
 
     Assertions.assertThat(createdTask).isNotNull();
     Assertions.assertThat(createdTask.getId()).isNotNull();
@@ -48,7 +49,7 @@ public class TaskServiceTest {
   public void createTask_WithInvalidStartDate_ThrowsValidationException() {
 
     Assertions.assertThatThrownBy(() ->
-      taskService.create(TaskConstants.TASK_INVALID_START_AT_DATE))
+      taskService.create(TaskConstants.TASK_INVALID_START_AT_DATE, UserConstants.USER_ID))
       .isInstanceOf(ValidationException.class)
       .hasMessage("A data de início deve ser maior que a data atual");
 
@@ -58,7 +59,7 @@ public class TaskServiceTest {
   public void createTask_WithInvalidEndDate_ThrowsValidationException() {
 
     Assertions.assertThatThrownBy(() ->
-      taskService.create(TaskConstants.TASK_INVALID_END_AT_DATE))
+      taskService.create(TaskConstants.TASK_INVALID_END_AT_DATE, UserConstants.USER_ID))
       .isInstanceOf(ValidationException.class)
       .hasMessage("A data de término deve ser maior que a data de início");
 

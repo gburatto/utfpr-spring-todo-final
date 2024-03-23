@@ -3,6 +3,8 @@ package com.utfpr.todo.tasks;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.utfpr.todo.users.UserConstants;
+
 public class TaskConstants {
 
         private static final String TITLE = "Test";
@@ -73,6 +75,7 @@ public class TaskConstants {
 
         public static final TaskOutputDTO TASK_OUTPUT_DTO = TaskOutputDTO.builder()
                         .id(UUID.randomUUID().toString())
+                        .userId(UserConstants.USER_ID)
                         .title(TITLE)
                         .description(DESCRIPTION)
                         .completed(COMPLETED)

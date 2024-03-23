@@ -13,9 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskInputDTO {
-    
-  private String userId;
-
+  
   @NotBlank
   private String title;
 

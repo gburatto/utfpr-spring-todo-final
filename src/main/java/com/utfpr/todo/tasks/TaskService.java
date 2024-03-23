@@ -19,7 +19,7 @@ public class TaskService {
     this.taskMapper = taskMapper;
   }
 
-  public TaskOutputDTO create(TaskInputDTO taskInput) {
+  public TaskOutputDTO create(TaskInputDTO taskInput, String userId) {
 
     LocalDateTime currentDate = LocalDateTime.now();
 
@@ -31,7 +31,7 @@ public class TaskService {
       throw new ValidationException("A data de término deve ser maior que a data de início");
     }
 
-    TaskModel taskModel = taskMapper.fromInput(taskInput);
+    TaskModel taskModel = taskMapper.fromInput(taskInput, userId);
 
     TaskModel createdTask = taskRepository.save(taskModel);
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
@@ -20,9 +21,11 @@ public class TaskController {
   private TaskService taskService;
 
   @PostMapping
-  public ResponseEntity<TaskOutputDTO> create(@RequestBody @Valid TaskInputDTO task) {
+  public ResponseEntity<TaskOutputDTO> create(HttpServletRequest request, @RequestBody @Valid TaskInputDTO task) {
 
-    TaskOutputDTO createdTask = taskService.create(task);
+    String userId = request.getAttribute("userId").toString();
+
+    TaskOutputDTO createdTask = taskService.create(task, userId);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
 
