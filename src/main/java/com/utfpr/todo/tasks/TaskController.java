@@ -20,7 +20,7 @@ public class TaskController {
   private TaskService taskService;
 
   @PostMapping
-  public ResponseEntity<?> create(@RequestBody @Valid TaskModel task) {
+  public ResponseEntity<?> create(@RequestBody @Valid TaskInputDTO task) {
 
     TaskModel createdTask = taskService.create(task);
 

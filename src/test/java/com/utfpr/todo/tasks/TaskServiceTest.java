@@ -19,13 +19,19 @@ public class TaskServiceTest {
   @Mock
   private TaskRepository taskRepository;
 
+  @Mock
+  private TaskMapper taskMapper;
+
   // operação_estado_retorno`
   @Test
   public void createTask_WithValidData_ReturnsTask() {
 
+    Mockito.when(taskMapper.fromInput(TaskConstants.TASK_INPUT_DTO))
+                .thenReturn(TaskConstants.TASK);
+
     Mockito.when(taskRepository.save(TaskConstants.TASK)).thenReturn(TaskConstants.TASK_CREATED);
 
-    TaskModel createdTask = taskService.create(TaskConstants.TASK);
+    TaskModel createdTask = taskService.create(TaskConstants.TASK_INPUT_DTO);
 
     Assertions.assertThat(createdTask).isNotNull();
     Assertions.assertThat(createdTask.getId()).isNotNull();

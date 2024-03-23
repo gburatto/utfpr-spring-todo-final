@@ -19,21 +19,27 @@ public class TaskConstants {
 
         private static final LocalDateTime YESTERDAY = LocalDateTime.now().minusDays(1);
 
-        public static final TaskModel TASK_INVALID_END_AT_DATE = TaskModel.builder()
+        public static final TaskInputDTO TASK_INVALID_END_AT_DATE = TaskInputDTO.builder()
                         .title(TITLE)
                         .description(DESCRIPTION)
-                        .completed(COMPLETED)
                         .priority(PRIORITY)
                         .startAt(START_AT)
                         .endAt(YESTERDAY)
                         .build();
 
-        public static final TaskModel TASK_INVALID_START_AT_DATE = TaskModel.builder()
+        public static final TaskInputDTO TASK_INVALID_START_AT_DATE = TaskInputDTO.builder()
                         .title(TITLE)
                         .description(DESCRIPTION)
-                        .completed(COMPLETED)
                         .priority(PRIORITY)
                         .startAt(YESTERDAY)
+                        .endAt(END_AT)
+                        .build();
+
+        public static final TaskInputDTO TASK_INPUT_DTO = TaskInputDTO.builder()
+                        .title(TITLE)
+                        .description(DESCRIPTION)
+                        .priority(PRIORITY)
+                        .startAt(START_AT)
                         .endAt(END_AT)
                         .build();
 

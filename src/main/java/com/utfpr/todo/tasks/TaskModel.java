@@ -27,15 +27,12 @@ public class TaskModel {
 
   private String userId;
 
-  @NotBlank
   @Column(nullable = false)
   private String title;
 
-  @NotBlank
   @Column(nullable = false)
   private String description;
 
-  @NotBlank
   @Column(nullable = false)
   private String priority;
 

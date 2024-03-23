@@ -11,23 +11,28 @@ public class TaskService {
 
   private TaskRepository taskRepository;
 
-  public TaskService(TaskRepository taskRepository) {
+  private TaskMapper taskMapper;
+
+  public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
     this.taskRepository = taskRepository;
+    this.taskMapper = taskMapper;
   }
 
-  public TaskModel create(TaskModel task) {
+  public TaskModel create(TaskInputDTO taskInput) {
 
     LocalDateTime currentDate = LocalDateTime.now();
 
-    if (currentDate.isAfter(task.getStartAt())) {
+    if (currentDate.isAfter(taskInput.getStartAt())) {
       throw new ValidationException("A data de início deve ser maior que a data atual");
     }
 
-    if (task.getEndAt().isBefore(task.getStartAt())) {
+    if (taskInput.getEndAt().isBefore(taskInput.getStartAt())) {
       throw new ValidationException("A data de término deve ser maior que a data de início");
     }
 
-    return taskRepository.save(task);
+    TaskModel taskModel = taskMapper.fromInput(taskInput);
+
+    return taskRepository.save(taskModel);
 
   }
 
