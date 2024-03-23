@@ -19,4 +19,18 @@ public class TaskMapper {
 
     }
 
+    public TaskOutputDTO fromModel(TaskModel taskModel) {
+
+        return TaskOutputDTO.builder()
+            .id(taskModel.getId())
+            .title(taskModel.getTitle())
+            .description(taskModel.getDescription())
+            .priority(taskModel.getPriority())
+            .completed(taskModel.isCompleted())
+            .startAt(taskModel.getStartAt())
+            .endAt(taskModel.getEndAt())
+            .build();
+
+    }
+
 }

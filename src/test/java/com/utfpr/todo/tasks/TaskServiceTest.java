@@ -31,7 +31,10 @@ public class TaskServiceTest {
 
     Mockito.when(taskRepository.save(TaskConstants.TASK)).thenReturn(TaskConstants.TASK_CREATED);
 
-    TaskModel createdTask = taskService.create(TaskConstants.TASK_INPUT_DTO);
+    Mockito.when(taskMapper.fromModel(TaskConstants.TASK_CREATED))
+                .thenReturn(TaskConstants.TASK_OUTPUT_DTO);
+
+    TaskOutputDTO createdTask = taskService.create(TaskConstants.TASK_INPUT_DTO);
 
     Assertions.assertThat(createdTask).isNotNull();
     Assertions.assertThat(createdTask.getId()).isNotNull();

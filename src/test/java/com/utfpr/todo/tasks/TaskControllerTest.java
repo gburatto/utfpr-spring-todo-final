@@ -29,14 +29,14 @@ public class TaskControllerTest {
   @Test
   public void createTask_WithDataValid_ReturnsCreated() throws JsonProcessingException, Exception {
 
-    Mockito.when(taskService.create(TaskConstants.TASK_INPUT_DTO)).thenReturn(TaskConstants.TASK_CREATED);
+    Mockito.when(taskService.create(TaskConstants.TASK_INPUT_DTO)).thenReturn(TaskConstants.TASK_OUTPUT_DTO);
 
     mockMvc.perform(
         post("/tasks")
             .contentType("application/json")
             .content(objectMapper.writeValueAsString(TaskConstants.TASK)))
         .andExpect(status().isCreated())
-        .andExpect(content().json(objectMapper.writeValueAsString(TaskConstants.TASK_CREATED)));
+        .andExpect(content().json(objectMapper.writeValueAsString(TaskConstants.TASK_OUTPUT_DTO)));
 
   }
 

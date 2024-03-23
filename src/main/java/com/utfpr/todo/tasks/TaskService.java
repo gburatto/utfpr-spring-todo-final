@@ -18,7 +18,7 @@ public class TaskService {
     this.taskMapper = taskMapper;
   }
 
-  public TaskModel create(TaskInputDTO taskInput) {
+  public TaskOutputDTO create(TaskInputDTO taskInput) {
 
     LocalDateTime currentDate = LocalDateTime.now();
 
@@ -32,7 +32,11 @@ public class TaskService {
 
     TaskModel taskModel = taskMapper.fromInput(taskInput);
 
-    return taskRepository.save(taskModel);
+    TaskModel createdTask = taskRepository.save(taskModel);
+
+    TaskOutputDTO taskOutput = taskMapper.fromModel(createdTask);
+
+    return taskOutput;
 
   }
 

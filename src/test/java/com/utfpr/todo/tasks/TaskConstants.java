@@ -19,22 +19,6 @@ public class TaskConstants {
 
         private static final LocalDateTime YESTERDAY = LocalDateTime.now().minusDays(1);
 
-        public static final TaskInputDTO TASK_INVALID_END_AT_DATE = TaskInputDTO.builder()
-                        .title(TITLE)
-                        .description(DESCRIPTION)
-                        .priority(PRIORITY)
-                        .startAt(START_AT)
-                        .endAt(YESTERDAY)
-                        .build();
-
-        public static final TaskInputDTO TASK_INVALID_START_AT_DATE = TaskInputDTO.builder()
-                        .title(TITLE)
-                        .description(DESCRIPTION)
-                        .priority(PRIORITY)
-                        .startAt(YESTERDAY)
-                        .endAt(END_AT)
-                        .build();
-
         public static final TaskInputDTO TASK_INPUT_DTO = TaskInputDTO.builder()
                         .title(TITLE)
                         .description(DESCRIPTION)
@@ -69,6 +53,32 @@ public class TaskConstants {
                         .description("")
                         .completed(false)
                         .priority("")
+                        .build();
+        
+        public static final TaskInputDTO TASK_INVALID_END_AT_DATE = TaskInputDTO.builder()
+                        .title(TITLE)
+                        .description(DESCRIPTION)
+                        .priority(PRIORITY)
+                        .startAt(START_AT)
+                        .endAt(YESTERDAY)
+                        .build();
+
+        public static final TaskInputDTO TASK_INVALID_START_AT_DATE = TaskInputDTO.builder()
+                        .title(TITLE)
+                        .description(DESCRIPTION)
+                        .priority(PRIORITY)
+                        .startAt(YESTERDAY)
+                        .endAt(END_AT)
+                        .build();
+
+        public static final TaskOutputDTO TASK_OUTPUT_DTO = TaskOutputDTO.builder()
+                        .id(UUID.randomUUID().toString())
+                        .title(TITLE)
+                        .description(DESCRIPTION)
+                        .completed(COMPLETED)
+                        .priority(PRIORITY)
+                        .startAt(START_AT)
+                        .endAt(END_AT)
                         .build();
 
 }
