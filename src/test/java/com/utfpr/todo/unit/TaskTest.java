@@ -8,7 +8,7 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import com.utfpr.todo.clean.domain.Task;
+import com.utfpr.todo.clean.domain.entity.Task;
 
 public class TaskTest {
 

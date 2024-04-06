@@ -1,7 +1,8 @@
-package com.utfpr.todo.clean.domain;
+package com.utfpr.todo.clean.domain.entity;
 
 import java.time.LocalDateTime;
 
+import com.utfpr.todo.clean.domain.vo.Title;
 import com.utfpr.todo.exceptions.ValidationException;
 
 import lombok.Data;
@@ -13,7 +14,7 @@ public class Task {
 
     private String userId;
 
-    private String title;
+    private Title title;
 
     private String description;
 
@@ -28,12 +29,7 @@ public class Task {
     public Task(String taskId, String userId, String title,
                 String description, String priority, boolean completed,
                 LocalDateTime startAt, LocalDateTime endAt) {
-        
-            // if (this.isInvalidTitle(title)) {
-            //     throw...
-            // }
-
-            this.isInvalidTitle(title);
+                    
             this.isInvalidDescription(description);
             this.isInvalidPriority(priority);
             this.isInvalidStartAt(startAt);
@@ -41,19 +37,13 @@ public class Task {
 
             this.id = taskId;
             this.userId = userId;
-            this.title = title;
+            this.title = new Title(title);
             this.description = description;
             this.priority = priority;
             this.completed = completed;
             this.startAt = startAt;
             this.endAt = endAt;
 
-    }
-
-    private void isInvalidTitle(String title) {
-        if (title == null || title.length() < 5) {
-            throw new ValidationException("Title must have at least 5 characters");
-        }
     }
 
     private void isInvalidDescription(String description) {
@@ -86,6 +76,10 @@ public class Task {
         if (endAt.isBefore(startAt)) {
             throw new ValidationException("EndAt must be after StartAt");
         }
+    }
+
+    public String getTitle() {
+        return title.getValue();
     }
 
 }
