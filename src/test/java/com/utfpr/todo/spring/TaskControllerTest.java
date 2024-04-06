@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utfpr.todo.tasks.TaskController;
+import com.utfpr.todo.clean.infra.controller.TaskController;
 import com.utfpr.todo.tasks.TaskService;
 import com.utfpr.todo.users.UserConstants;
 import com.utfpr.todo.users.UserRepository;

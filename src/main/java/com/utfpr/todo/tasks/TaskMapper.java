@@ -2,6 +2,8 @@ package com.utfpr.todo.tasks;
 
 import org.springframework.stereotype.Component;
 
+import com.utfpr.todo.clean.infra.model.TaskModel;
+
 @Component
 public class TaskMapper {
     

@@ -4,17 +4,19 @@ import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 
+import com.utfpr.todo.clean.infra.model.TaskModel;
+import com.utfpr.todo.clean.infra.repository.TaskModelJpaRepository;
 import com.utfpr.todo.exceptions.NotFoundException;
 import com.utfpr.todo.exceptions.ValidationException;
 
 @Service
 public class TaskService {
 
-  private TaskRepository taskRepository;
+  private TaskModelJpaRepository taskRepository;
 
   private TaskMapper taskMapper;
 
-  public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
+  public TaskService(TaskModelJpaRepository taskRepository, TaskMapper taskMapper) {
     this.taskRepository = taskRepository;
     this.taskMapper = taskMapper;
   }

@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.utfpr.todo.tasks.TaskModel;
-import com.utfpr.todo.tasks.TaskRepository;
+import com.utfpr.todo.clean.infra.model.TaskModel;
+import com.utfpr.todo.clean.infra.repository.TaskModelJpaRepository;
 
 @SpringBootTest
 public class TaskRepositoryTest {
 
   @Autowired
-  private TaskRepository taskRepository;
+  private TaskModelJpaRepository taskRepository;
 
   @Test
   public void createTask_WithDataValid_ReturnsTask() {

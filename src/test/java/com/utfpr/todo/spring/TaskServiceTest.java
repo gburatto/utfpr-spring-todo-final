@@ -8,10 +8,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.utfpr.todo.clean.infra.repository.TaskModelJpaRepository;
 import com.utfpr.todo.exceptions.ValidationException;
 import com.utfpr.todo.tasks.TaskMapper;
 import com.utfpr.todo.tasks.TaskOutputDTO;
-import com.utfpr.todo.tasks.TaskRepository;
 import com.utfpr.todo.tasks.TaskService;
 import com.utfpr.todo.users.UserConstants;
 
@@ -22,7 +22,7 @@ public class TaskServiceTest {
   private TaskService taskService;
 
   @Mock
-  private TaskRepository taskRepository;
+  private TaskModelJpaRepository taskRepository;
 
   @Mock
   private TaskMapper taskMapper;
