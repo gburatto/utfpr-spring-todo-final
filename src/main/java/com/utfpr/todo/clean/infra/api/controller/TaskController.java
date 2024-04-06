@@ -1,4 +1,4 @@
-package com.utfpr.todo.clean.infra.controller;
+package com.utfpr.todo.clean.infra.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.utfpr.todo.clean.application.usecase.complete_task.CompleteTask;
+import com.utfpr.todo.clean.application.usecase.complete_task.CompleteTaskCommand;
+import com.utfpr.todo.clean.application.usecase.complete_task.CompleteTaskOutput;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTask;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskCommand;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskOutput;
+import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
+import com.utfpr.todo.clean.infra.api.output.TaskOutputDTO;
 import com.utfpr.todo.clean.infra.model.TaskModel;
-import com.utfpr.todo.tasks.TaskInputDTO;
-import com.utfpr.todo.tasks.TaskOutputDTO;
-import com.utfpr.todo.tasks.TaskService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -26,10 +28,10 @@ import jakarta.validation.Valid;
 public class TaskController {
 
   @Autowired
-  private TaskService taskService;
+  private CreateTask createTask;
 
   @Autowired
-  private CreateTask createTask;
+  private CompleteTask completeTask;
 
   @PostMapping
   public ResponseEntity<TaskOutputDTO> create(HttpServletRequest request, @RequestBody @Valid TaskInputDTO taskInput) {
@@ -63,10 +65,22 @@ public class TaskController {
   @PatchMapping("/{id}/complete")
   public ResponseEntity<?> complete(@PathVariable String id) {
 
-    TaskModel updatedTask = taskService.complete(id);
+    CompleteTaskCommand command = new CompleteTaskCommand(id);
 
-    return ResponseEntity.status(HttpStatus.OK).body(updatedTask);
+    CompleteTaskOutput updatedTask = completeTask.execute(command);
 
+    TaskOutputDTO taskOutput = TaskOutputDTO.builder()
+                .id(updatedTask.getId())
+                .userId(updatedTask.getUserId())
+                .title(updatedTask.getTitle())
+                .description(updatedTask.getDescription())
+                .priority(updatedTask.getPriority())
+                .startAt(updatedTask.getStartAt())
+                .endAt(updatedTask.getEndAt())
+                .completed(updatedTask.isCompleted()).build();
+
+    return ResponseEntity.status(HttpStatus.OK).body(taskOutput);
+    
   }
 
 }

@@ -11,8 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
 import com.utfpr.todo.clean.infra.model.TaskModel;
-import com.utfpr.todo.tasks.TaskInputDTO;
 import com.utfpr.todo.users.UserConstants;
 import com.utfpr.todo.users.UserModel;
 

@@ -1,7 +1,8 @@
-package com.utfpr.todo.tasks;
+package com.utfpr.todo.clean.infra.api.input;
 
 import java.time.LocalDateTime;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,19 +12,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskOutputDTO {
-
-  private String id;
-
-  private String userId;
-
+public class TaskInputDTO {
+  
+  @NotBlank
   private String title;
 
+  @NotBlank
   private String description;
 
+  @NotBlank
   private String priority;
-
-  private boolean completed;
 
   private LocalDateTime startAt;
 

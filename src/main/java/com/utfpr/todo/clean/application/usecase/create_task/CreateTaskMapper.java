@@ -15,6 +15,7 @@ public class CreateTaskMapper {
     }
     
     public static CreateTaskOutput toCreateTaskOutput(Task task) {
+        
         return CreateTaskOutput.builder()
             .id(task.getId())
             .userId(task.getUserId())

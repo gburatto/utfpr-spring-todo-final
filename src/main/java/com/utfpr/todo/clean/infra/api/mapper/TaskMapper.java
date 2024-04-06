@@ -1,7 +1,9 @@
-package com.utfpr.todo.tasks;
+package com.utfpr.todo.clean.infra.api.mapper;
 
 import org.springframework.stereotype.Component;
 
+import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
+import com.utfpr.todo.clean.infra.api.output.TaskOutputDTO;
 import com.utfpr.todo.clean.infra.model.TaskModel;
 
 @Component

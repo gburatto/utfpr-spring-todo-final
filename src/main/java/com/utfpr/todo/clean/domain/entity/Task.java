@@ -6,10 +6,10 @@ import java.util.UUID;
 import com.utfpr.todo.clean.domain.vo.Title;
 import com.utfpr.todo.exceptions.ValidationException;
 
-import lombok.Data;
+import lombok.Getter;
 
 // entity
-@Data
+@Getter
 public class Task {
     
     private String id;
@@ -98,6 +98,16 @@ public class Task {
         if (endAt.isBefore(startAt)) {
             throw new ValidationException("EndAt must be after StartAt");
         }
+    }
+
+    public void complete() {
+        
+        if (this.completed) {
+            throw new ValidationException("Task is already completed");
+        }
+
+        this.completed = true;
+
     }
 
     public String getTitle() {

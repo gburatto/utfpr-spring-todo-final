@@ -13,8 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utfpr.todo.clean.infra.controller.TaskController;
-import com.utfpr.todo.tasks.TaskService;
+import com.utfpr.todo.clean.infra.api.controller.TaskController;
 import com.utfpr.todo.users.UserConstants;
 import com.utfpr.todo.users.UserRepository;
 
@@ -23,9 +22,6 @@ public class TaskControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
-
-  @MockBean
-  private TaskService taskService;
 
   @MockBean
   private UserRepository userRepository;
@@ -37,8 +33,6 @@ public class TaskControllerTest {
   public void createTask_WithDataValid_ReturnsCreated() throws JsonProcessingException, Exception {
 
     Mockito.when(userRepository.findByUsername(UserConstants.USERNAME)).thenReturn(UserConstants.USER);
-
-    Mockito.when(taskService.create(TaskConstants.TASK_INPUT_DTO, UserConstants.USER_ID)).thenReturn(TaskConstants.TASK_OUTPUT_DTO);
 
     mockMvc.perform(
         post("/tasks")
