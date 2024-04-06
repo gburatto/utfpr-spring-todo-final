@@ -2,6 +2,7 @@ package com.utfpr.todo.clean.domain.vo;
 
 import com.utfpr.todo.exceptions.ValidationException;
 
+// value object
 public class Title {
 
     private String value;

@@ -1,12 +1,14 @@
 package com.utfpr.todo.clean.domain.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import com.utfpr.todo.clean.domain.vo.Title;
 import com.utfpr.todo.exceptions.ValidationException;
 
 import lombok.Data;
 
+// entity
 @Data
 public class Task {
     
@@ -26,7 +28,7 @@ public class Task {
 
     private LocalDateTime endAt;
 
-    public Task(String taskId, String userId, String title,
+    private Task(String taskId, String userId, String title,
                 String description, String priority, boolean completed,
                 LocalDateTime startAt, LocalDateTime endAt) {
                     
@@ -44,6 +46,26 @@ public class Task {
             this.startAt = startAt;
             this.endAt = endAt;
 
+    }
+
+    public static Task create(String userId, String title,
+                              String description, String priority,
+                              LocalDateTime startAt, LocalDateTime endAt) {
+
+        String taskId = UUID.randomUUID().toString();
+
+        boolean completed = false;
+
+        return new Task(taskId, userId, title, description, priority, completed, startAt, endAt);
+
+    }
+
+    public static Task restore(String taskId, String userId, String title,
+                                String description, String priority, boolean completed,
+                                LocalDateTime startAt, LocalDateTime endAt) {
+
+        return new Task(taskId, userId, title, description, priority, completed, startAt, endAt);
+        
     }
 
     private void isInvalidDescription(String description) {
