@@ -1,4 +1,4 @@
-package com.utfpr.todo.tasks;
+package com.utfpr.todo.spring;
 
 import java.time.format.DateTimeFormatter;
 
@@ -6,6 +6,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.utfpr.todo.tasks.TaskModel;
+import com.utfpr.todo.tasks.TaskRepository;
 
 @SpringBootTest
 public class TaskRepositoryTest {

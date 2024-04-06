@@ -1,8 +1,11 @@
-package com.utfpr.todo.tasks;
+package com.utfpr.todo.spring;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.utfpr.todo.tasks.TaskInputDTO;
+import com.utfpr.todo.tasks.TaskModel;
+import com.utfpr.todo.tasks.TaskOutputDTO;
 import com.utfpr.todo.users.UserConstants;
 
 public class TaskConstants {

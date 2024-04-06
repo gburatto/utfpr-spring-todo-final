@@ -16,26 +16,26 @@ public class TaskTest {
     public void createTask_ValidInput_ShouldCreateTask() {
 
         // Arrange
-        String taskId = UUID.randomUUID().toString();
         String userId = UUID.randomUUID().toString();
         String title = "Task Title";
         String description = "Task Description";
         String priority = "high";
-        boolean completed = false;
         LocalDateTime startAt = LocalDateTime.now().plusDays(1);
         LocalDateTime endAt = LocalDateTime.now().plusDays(2);
 
+        boolean expectedCompleted = false;
+
         // Act
-        Task task = new Task(taskId, userId, title, description, priority, completed, startAt, endAt);
+        Task task = Task.create(userId, title, description, priority, startAt, endAt);
         
         // Assert
         assertNotNull(task);
-        assertEquals(taskId, task.getId());
+        assertNotNull(task.getId());
         assertEquals(userId, task.getUserId());
         assertEquals(title, task.getTitle());
         assertEquals(description, task.getDescription());
         assertEquals(priority, task.getPriority());
-        assertEquals(completed, task.isCompleted());
+        assertEquals(expectedCompleted, task.isCompleted());
         assertEquals(startAt, task.getStartAt());
         assertEquals(endAt, task.getEndAt());
 

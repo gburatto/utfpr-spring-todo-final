@@ -1,4 +1,4 @@
-package com.utfpr.todo.tasks;
+package com.utfpr.todo.spring;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.utfpr.todo.exceptions.ValidationException;
+import com.utfpr.todo.tasks.TaskMapper;
+import com.utfpr.todo.tasks.TaskOutputDTO;
+import com.utfpr.todo.tasks.TaskRepository;
+import com.utfpr.todo.tasks.TaskService;
 import com.utfpr.todo.users.UserConstants;
 
 @ExtendWith(MockitoExtension.class)
