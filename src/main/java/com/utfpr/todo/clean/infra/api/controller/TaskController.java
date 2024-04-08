@@ -18,13 +18,12 @@ import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskCommand;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskOutput;
 import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
 import com.utfpr.todo.clean.infra.api.output.TaskOutputDTO;
-import com.utfpr.todo.clean.infra.model.TaskModel;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("")
 public class TaskController {
 
   @Autowired
@@ -33,7 +32,7 @@ public class TaskController {
   @Autowired
   private CompleteTask completeTask;
 
-  @PostMapping
+  @PostMapping("/createTask")
   public ResponseEntity<TaskOutputDTO> create(HttpServletRequest request, @RequestBody @Valid TaskInputDTO taskInput) {
 
     String userId = request.getAttribute("userId").toString();
@@ -62,7 +61,7 @@ public class TaskController {
 
   }
 
-  @PatchMapping("/{id}/complete")
+  @PatchMapping("/completeTask/{id}")
   public ResponseEntity<?> complete(@PathVariable String id) {
 
     CompleteTaskCommand command = new CompleteTaskCommand(id);
@@ -80,7 +79,7 @@ public class TaskController {
                 .completed(updatedTask.isCompleted()).build();
 
     return ResponseEntity.status(HttpStatus.OK).body(taskOutput);
-    
+
   }
 
 }

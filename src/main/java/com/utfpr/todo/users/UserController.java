@@ -1,7 +1,5 @@
 package com.utfpr.todo.users;
 
-import java.util.Collections;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,26 +15,25 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 public class UserController {
 
   @Autowired
-  private UserRepository userRepository;
+  private UserService userService;
+
+  @Autowired
+  private UserMapper userMapper;
 
   @PostMapping
-  public ResponseEntity<?> create(@RequestBody UserModel user) {
+  public ResponseEntity<UserOutputDTO> create(@RequestBody UserModel user) {
 
-    UserModel userModel = userRepository.findByUsername(user.getUsername());
-
-    if (userModel != null) {
-      // throw new RuntimeException("Username already exists");
-      return ResponseEntity.status(HttpStatus.CONFLICT).body(
-          Collections.singletonMap("error", "Username already exists"));
-    }
+    userService.findByUsername(user.getUsername());
 
     String hashedPassword = BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray());
 
     user.setPassword(hashedPassword);
 
-    UserModel newUser = userRepository.save(user);
+    UserModel newUser = userService.save(user);
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+    UserOutputDTO output = userMapper.toOutputDTO(newUser);
+
+    return ResponseEntity.status(HttpStatus.CREATED).body(output);
 
   }
 

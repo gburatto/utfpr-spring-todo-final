@@ -28,13 +28,19 @@ public class UserConstants {
         .password(PASSWORD)
         .build();
 
-    public static final UserModel USER = UserModel.builder()
+    public static final UserOutputDTO USER_OUTPUT_DTO = UserOutputDTO.builder()
+        .id(USER_ID)
+        .name(NAME)
+        .email(EMAIL)
+        .username(USERNAME)
+        .build();
+
+    public static final UserModel CREATED_USER = UserModel.builder()
         .id(USER_ID)
         .email(EMAIL)
         .name(NAME)
         .username(USERNAME)
         .password(HASHED_PASSWORD)
         .build();
-
 
 }

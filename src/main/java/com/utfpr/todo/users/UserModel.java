@@ -34,14 +34,4 @@ public class UserModel {
   @CreationTimestamp
   private LocalDateTime createdAt;
 
-  // @JsonIgnore
-  // public String getPassword() {
-  //   return password;
-  // }
-
-  // @JsonProperty
-  // public void setPassword(String password) {
-  //   this.password = password;
-  // }
-
 }

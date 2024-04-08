@@ -1,8 +1,9 @@
 package com.utfpr.todo.spring;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -13,26 +14,27 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utfpr.todo.clean.application.usecase.complete_task.CompleteTask;
-import com.utfpr.todo.clean.application.usecase.create_task.CreateTask;
-import com.utfpr.todo.clean.infra.api.controller.TaskController;
 import com.utfpr.todo.users.UserConstants;
+import com.utfpr.todo.users.UserController;
+import com.utfpr.todo.users.UserMapper;
+import com.utfpr.todo.users.UserModel;
 import com.utfpr.todo.users.UserRepository;
+import com.utfpr.todo.users.UserService;
 
-@WebMvcTest(TaskController.class)
-public class TaskControllerTest {
+@WebMvcTest(UserController.class)
+public class UserControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
 
   @MockBean
+  private UserService userService;
+
+  @MockBean
   private UserRepository userRepository;
 
   @MockBean
-  private CreateTask createTask;
-
-  @MockBean
-  private CompleteTask completeTask;
+  private UserMapper userMapper;
 
   @Autowired
   private ObjectMapper objectMapper;
@@ -40,17 +42,18 @@ public class TaskControllerTest {
   @Test
   public void createTask_WithDataValid_ReturnsCreated() throws JsonProcessingException, Exception {
 
-    Mockito.when(userRepository.findByUsername(UserConstants.USERNAME)).thenReturn(UserConstants.CREATED_USER);
+    Mockito.when(userService.save(any(UserModel.class))).thenReturn(UserConstants.CREATED_USER);
 
-    Mockito.when(createTask.execute(TaskConstants.CREATE_TASK_COMMAND)).thenReturn(TaskConstants.CREATE_TASK_OUTPUT);
+    Mockito.when(userRepository.save(any(UserModel.class))).thenReturn(UserConstants.CREATED_USER);
+
+    Mockito.when(userMapper.toOutputDTO(UserConstants.CREATED_USER)).thenReturn(UserConstants.USER_OUTPUT_DTO);
 
     mockMvc.perform(
-        post("/createTask")
+        post("/users")
             .contentType("application/json")
-            .header("Authorization", UserConstants.AUTH_HEADER)
-            .content(objectMapper.writeValueAsString(TaskConstants.TASK)))
+            .content(objectMapper.writeValueAsString(UserConstants.USER_INPUT_DTO)))
         .andExpect(status().isCreated())
-        .andExpect(content().json(objectMapper.writeValueAsString(TaskConstants.TASK_OUTPUT_DTO)));
+        .andExpect(content().json(objectMapper.writeValueAsString(UserConstants.USER_OUTPUT_DTO)));
 
   }
 

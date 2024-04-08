@@ -36,7 +36,9 @@ public class TaskIT {
 
     // when / act
 
-    ResponseEntity<TaskModel> createTaskResponse = restTemplate.postForEntity("/tasks", request, TaskModel.class);
+    ResponseEntity<TaskModel> createTaskResponse = restTemplate.postForEntity("/createTask", request, TaskModel.class);
+    //ResponseEntity<Object> createTaskResponse = restTemplate.postForEntity("/createTask", request, Object.class);
+    //System.out.println(createTaskResponse.getBody());
 
     // then / assert
 
@@ -63,7 +65,7 @@ public class TaskIT {
 
     // when / act
 
-    ResponseEntity<Object> createTaskResponse = restTemplate.postForEntity("/tasks", request, Object.class);
+    ResponseEntity<Object> createTaskResponse = restTemplate.postForEntity("/createTask", request, Object.class);
 
     // then / assert
 
