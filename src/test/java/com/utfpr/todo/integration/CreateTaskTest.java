@@ -2,6 +2,7 @@ package com.utfpr.todo.integration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import com.utfpr.todo.clean.application.usecase.create_task.CreateTask;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskCommand;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskOutput;
 import com.utfpr.todo.clean.infra.gateway.TaskMemoryGateway;
+import com.utfpr.todo.exceptions.ValidationException;
 
 public class CreateTaskTest {
     
@@ -46,6 +48,47 @@ public class CreateTaskTest {
         assertEquals(command.getStartAt(), output.getStartAt());
         assertEquals(command.getEndAt(), output.getEndAt());
         assertEquals(expectedCompleted, output.isCompleted());
+
+    }
+
+    @Test
+    public void createTask_WithDataInvalid_ThrowsException() {
+
+        // Arrange
+        TaskMemoryGateway taskGateway = new TaskMemoryGateway();
+
+        CreateTask createTask = new CreateTask(taskGateway);
+
+        CreateTaskCommand invalidCommand = CreateTaskCommand.builder()
+            .userId(UUID.randomUUID().toString())
+            .title("Task") // Invalid Title
+            .description("Task") // Invalid Description
+            .priority("other") // Invalid Priority
+            .startAt(LocalDateTime.now().minusDays(1)) // Invalid StartAt
+            .endAt(LocalDateTime.now().minusDays(2)) // Invalid EndAt
+            .build();
+
+        // Act / Assert
+        assertThrows(ValidationException.class, () -> {
+            createTask.execute(invalidCommand);
+        });
+
+    }
+
+    @Test
+    public void createTask_WithDataNull_ThrowsException() {
+
+        // Arrange
+        TaskMemoryGateway taskGateway = new TaskMemoryGateway();
+
+        CreateTask createTask = new CreateTask(taskGateway);
+
+        CreateTaskCommand nullCommand = CreateTaskCommand.builder().build();
+
+        // Act / Assert
+        assertThrows(ValidationException.class, () -> {
+            createTask.execute(nullCommand);
+        });
 
     }
 
