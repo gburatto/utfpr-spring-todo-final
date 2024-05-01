@@ -46,7 +46,7 @@ public class UserControllerTest {
 
     Mockito.when(userRepository.save(any(UserModel.class))).thenReturn(UserConstants.CREATED_USER);
 
-    Mockito.when(userMapper.toOutputDTO(UserConstants.CREATED_USER)).thenReturn(UserConstants.USER_OUTPUT_DTO);
+    Mockito.when(userMapper.fromModel(UserConstants.CREATED_USER)).thenReturn(UserConstants.USER_OUTPUT_DTO);
 
     mockMvc.perform(
         post("/users")

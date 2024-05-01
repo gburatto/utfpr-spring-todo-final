@@ -3,12 +3,12 @@ package com.utfpr.todo.clean.domain.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import com.utfpr.todo.clean.domain.vo.Completed;
-import com.utfpr.todo.clean.domain.vo.Description;
-import com.utfpr.todo.clean.domain.vo.EndAt;
-import com.utfpr.todo.clean.domain.vo.Priority;
-import com.utfpr.todo.clean.domain.vo.StartAt;
-import com.utfpr.todo.clean.domain.vo.Title;
+import com.utfpr.todo.clean.domain.vo.tasks.Completed;
+import com.utfpr.todo.clean.domain.vo.tasks.Description;
+import com.utfpr.todo.clean.domain.vo.tasks.EndAt;
+import com.utfpr.todo.clean.domain.vo.tasks.Priority;
+import com.utfpr.todo.clean.domain.vo.tasks.StartAt;
+import com.utfpr.todo.clean.domain.vo.tasks.Title;
 
 import lombok.Getter;
 

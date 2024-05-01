@@ -1,4 +1,4 @@
-package com.utfpr.todo.clean.domain.vo;
+package com.utfpr.todo.clean.domain.vo.tasks;
 
 import java.time.LocalDateTime;
 

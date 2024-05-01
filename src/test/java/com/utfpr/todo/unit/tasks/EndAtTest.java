@@ -1,4 +1,4 @@
-package com.utfpr.todo.unit;
+package com.utfpr.todo.unit.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 
-import com.utfpr.todo.clean.domain.vo.EndAt;
+import com.utfpr.todo.clean.domain.vo.tasks.EndAt;
 import com.utfpr.todo.exceptions.ValidationException;
 
 public class EndAtTest {

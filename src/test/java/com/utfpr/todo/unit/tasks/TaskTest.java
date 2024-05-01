@@ -1,4 +1,4 @@
-package com.utfpr.todo.unit;
+package com.utfpr.todo.unit.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

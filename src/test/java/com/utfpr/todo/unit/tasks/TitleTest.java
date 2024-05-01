@@ -1,4 +1,4 @@
-package com.utfpr.todo.unit;
+package com.utfpr.todo.unit.tasks;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,35 +6,36 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import com.utfpr.todo.clean.domain.vo.Description;
+import com.utfpr.todo.clean.domain.vo.tasks.Title;
 import com.utfpr.todo.exceptions.ValidationException;
 
-public class DescriptionTest {
+public class TitleTest {
+    
     @Test
-    public void description_ValidInput_ShouldCreateDescription() {
+    public void title_ValidInput_ShouldCreateTitle() {
 
         // Arrange
-        String validDescription = "Task Description";
+        String validTitle = "Task Title";
 
         // Act
-        Description description = new Description(validDescription);
+        Title title = new Title(validTitle);
 
         // Assert
-        assertNotNull(description);
-        assertEquals(validDescription, description.getValue());
+        assertNotNull(title);
+        assertEquals(validTitle, title.getValue());
 
     }
 
     @Test
-    public void description_InvalidInput_ThrowsException() {
+    public void title_InvalidInput_ThrowsException() {
 
         // Arrange
-        String invalidDescription = "Task";
-        String message = "Description must have at least 10 characters";
+        String invalidTitle = "Task";
+        String message = "Title must have at least 5 characters";
 
         // Act / Assert
         ValidationException exception = assertThrows(ValidationException.class, () -> {
-            new Description(invalidDescription);
+            new Title(invalidTitle);
         });
         assertEquals(message, exception.getMessage());
 
@@ -44,12 +45,12 @@ public class DescriptionTest {
     public void title_NullInput_ThrowsException() {
 
         // Arrange
-        String nullDescription = null;
-        String message = "Description must have at least 10 characters";
+        String nullTitle = null;
+        String message = "Title must have at least 5 characters";
 
         // Act / Assert
         ValidationException exception = assertThrows(ValidationException.class, () -> {
-            new Description(nullDescription);
+            new Title(nullTitle);
         });
         assertEquals(message, exception.getMessage());
 

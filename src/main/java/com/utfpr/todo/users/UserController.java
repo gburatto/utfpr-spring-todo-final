@@ -31,7 +31,7 @@ public class UserController {
 
     UserModel newUser = userService.save(user);
 
-    UserOutputDTO output = userMapper.toOutputDTO(newUser);
+    UserOutputDTO output = userMapper.fromModel(newUser);
 
     return ResponseEntity.status(HttpStatus.CREATED).body(output);
 
