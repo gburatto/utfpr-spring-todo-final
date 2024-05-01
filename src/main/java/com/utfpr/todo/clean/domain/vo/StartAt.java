@@ -16,6 +16,10 @@ public class StartAt {
 
     private void isInvalidStartAt(LocalDateTime startAt) {
 
+        if (startAt == null) {
+            throw new ValidationException("StartAt cannot be null and must be a future date");
+        }
+        
         LocalDateTime currentDate = LocalDateTime.now();
         if (currentDate.isAfter(startAt)) {
             throw new ValidationException("StartAt must be a future date");

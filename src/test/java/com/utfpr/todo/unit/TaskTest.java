@@ -2,6 +2,7 @@ package com.utfpr.todo.unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -9,6 +10,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import com.utfpr.todo.clean.domain.entity.Task;
+import com.utfpr.todo.exceptions.ValidationException;
 
 public class TaskTest {
 
@@ -38,6 +40,44 @@ public class TaskTest {
         assertEquals(expectedCompleted, task.isCompleted());
         assertEquals(startAt, task.getStartAt());
         assertEquals(endAt, task.getEndAt());
+
+    }
+
+    @Test
+    public void createTask_InvalidInput_ThrowsException() {
+
+        // Arrange
+        String userId = UUID.randomUUID().toString();
+        String invalidTitle = "Task";
+        String invalidDescription = "Task";
+        String invalidPriority = "none";
+        LocalDateTime invalidStartAt = LocalDateTime.now().minusDays(1);
+        LocalDateTime invalidEndAt = LocalDateTime.now().minusDays(2);
+
+        // Act / Assert
+        assertThrows(ValidationException.class, () -> {
+            Task.create(userId, invalidTitle, invalidDescription,
+                        invalidPriority, invalidStartAt, invalidEndAt);
+        });
+
+    }
+
+    @Test
+    public void createTask_NullInput_ThrowsException() {
+
+        // Arrange
+        String userId = null;
+        String nullTitle = null;
+        String nullDescription = null;
+        String nullPriority = null;
+        LocalDateTime nullStartAt = null;
+        LocalDateTime nullEndAt = null;
+
+        // Act / Assert
+        assertThrows(ValidationException.class, () -> {
+            Task.create(userId, nullTitle, nullDescription,
+                        nullPriority, nullStartAt, nullEndAt);
+        });
 
     }
 

@@ -6,11 +6,9 @@ import java.util.UUID;
 import com.utfpr.todo.clean.domain.vo.Completed;
 import com.utfpr.todo.clean.domain.vo.Description;
 import com.utfpr.todo.clean.domain.vo.EndAt;
-import com.utfpr.todo.clean.domain.vo.Id;
 import com.utfpr.todo.clean.domain.vo.Priority;
 import com.utfpr.todo.clean.domain.vo.StartAt;
 import com.utfpr.todo.clean.domain.vo.Title;
-import com.utfpr.todo.clean.domain.vo.UserId;
 
 import lombok.Getter;
 
@@ -18,9 +16,9 @@ import lombok.Getter;
 @Getter
 public class Task {
     
-    private Id id;
+    private String id;
 
-    private UserId userId;
+    private String userId;
 
     private Title title;
 
@@ -38,14 +36,14 @@ public class Task {
                 String description, String priority, boolean completed,
                 LocalDateTime startAt, LocalDateTime endAt) {
 
-            this.id = new Id(taskId);
-            this.userId = new UserId(userId);
+            this.id = taskId;
+            this.userId = userId;
             this.title = new Title(title);
             this.description = new Description(description);
             this.priority = new Priority(priority);
             this.completed = new Completed(completed);
             this.startAt = new StartAt(startAt);
-            this.endAt = new EndAt(startAt, endAt);
+            this.endAt = new EndAt(this.startAt.getValue(), endAt);
 
     }
 
@@ -73,14 +71,6 @@ public class Task {
 
     public void complete() {
         completed.complete();
-    }
-
-    public String getId() {
-        return id.getValue();
-    }
-
-    public String getUserId() {
-        return userId.getValue();
     }
 
     public String getTitle() {

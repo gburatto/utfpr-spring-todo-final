@@ -15,6 +15,10 @@ public class EndAt {
     }
 
     private void isInvalidEndAt(LocalDateTime startAt, LocalDateTime endAt) {
+        if (endAt == null) {
+            throw new ValidationException("EndAt cannot be null and must be after StartAt");
+        }
+
         if (endAt.isBefore(startAt)) {
             throw new ValidationException("EndAt must be after StartAt");
         }
