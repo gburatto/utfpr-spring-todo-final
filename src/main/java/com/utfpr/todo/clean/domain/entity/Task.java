@@ -3,8 +3,14 @@ package com.utfpr.todo.clean.domain.entity;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.utfpr.todo.clean.domain.vo.Completed;
+import com.utfpr.todo.clean.domain.vo.Description;
+import com.utfpr.todo.clean.domain.vo.EndAt;
+import com.utfpr.todo.clean.domain.vo.Id;
+import com.utfpr.todo.clean.domain.vo.Priority;
+import com.utfpr.todo.clean.domain.vo.StartAt;
 import com.utfpr.todo.clean.domain.vo.Title;
-import com.utfpr.todo.exceptions.ValidationException;
+import com.utfpr.todo.clean.domain.vo.UserId;
 
 import lombok.Getter;
 
@@ -12,39 +18,34 @@ import lombok.Getter;
 @Getter
 public class Task {
     
-    private String id;
+    private Id id;
 
-    private String userId;
+    private UserId userId;
 
     private Title title;
 
-    private String description;
+    private Description description;
 
-    private String priority;
+    private Priority priority;
 
-    private boolean completed;
+    private Completed completed;
 
-    private LocalDateTime startAt;
+    private StartAt startAt;
 
-    private LocalDateTime endAt;
+    private EndAt endAt;
 
     private Task(String taskId, String userId, String title,
                 String description, String priority, boolean completed,
                 LocalDateTime startAt, LocalDateTime endAt) {
-                    
-            this.isInvalidDescription(description);
-            this.isInvalidPriority(priority);
-            this.isInvalidStartAt(startAt);
-            this.isInvalidEndAt(startAt, endAt);
 
-            this.id = taskId;
-            this.userId = userId;
+            this.id = new Id(taskId);
+            this.userId = new UserId(userId);
             this.title = new Title(title);
-            this.description = description;
-            this.priority = priority;
-            this.completed = completed;
-            this.startAt = startAt;
-            this.endAt = endAt;
+            this.description = new Description(description);
+            this.priority = new Priority(priority);
+            this.completed = new Completed(completed);
+            this.startAt = new StartAt(startAt);
+            this.endAt = new EndAt(startAt, endAt);
 
     }
 
@@ -68,50 +69,42 @@ public class Task {
         
     }
 
-    private void isInvalidDescription(String description) {
-        if (description == null || description.length() < 10) {
-            throw new ValidationException("Description must have at least 10 characters");
-        }
-    }
 
-    private void isInvalidPriority(String priority) {
-        if ((priority == null) ||
-            ((!priority.equals("low")) &&
-             (!priority.equals("medium")) &&
-             (!priority.equals("high"))
-            )
-        ) {
-            throw new ValidationException("Priority must be low, medium or high");
-        }
-    }
-
-    private void isInvalidStartAt(LocalDateTime startAt) {
-
-        LocalDateTime currentDate = LocalDateTime.now();
-        if (currentDate.isAfter(startAt)) {
-            throw new ValidationException("StartAt must be a future date");
-        }
-    
-    }
-
-    private void isInvalidEndAt(LocalDateTime startAt, LocalDateTime endAt) {
-        if (endAt.isBefore(startAt)) {
-            throw new ValidationException("EndAt must be after StartAt");
-        }
-    }
 
     public void complete() {
-        
-        if (this.completed) {
-            throw new ValidationException("Task is already completed");
-        }
+        completed.complete();
+    }
 
-        this.completed = true;
+    public String getId() {
+        return id.getValue();
+    }
 
+    public String getUserId() {
+        return userId.getValue();
     }
 
     public String getTitle() {
         return title.getValue();
+    }
+
+    public String getDescription() {
+        return description.getValue();
+    }
+
+    public String getPriority() {
+        return priority.getValue();
+    }
+
+    public boolean isCompleted() {
+        return completed.getValue();
+    }
+
+    public LocalDateTime getStartAt() {
+        return startAt.getValue();
+    }
+
+    public LocalDateTime getEndAt() {
+        return endAt.getValue();
     }
 
 }
