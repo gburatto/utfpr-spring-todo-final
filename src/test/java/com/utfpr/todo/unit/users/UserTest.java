@@ -3,11 +3,14 @@ package com.utfpr.todo.unit.users;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 import com.utfpr.todo.clean.domain.entity.User;
 import com.utfpr.todo.exceptions.ValidationException;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
 
 public class UserTest {
     
@@ -29,6 +32,8 @@ public class UserTest {
         assertEquals(username, user.getUsername());
         assertEquals(name, user.getName());
         assertEquals(email, user.getEmail());
+        assertTrue(BCrypt.verifyer().verify(password.toCharArray(), user.getPassword()).verified);
+        
     }
 
     @Test

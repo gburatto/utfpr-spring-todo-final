@@ -14,12 +14,11 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.utfpr.todo.users.UserConstants;
-import com.utfpr.todo.users.UserController;
-import com.utfpr.todo.users.UserMapper;
-import com.utfpr.todo.users.UserModel;
-import com.utfpr.todo.users.UserRepository;
-import com.utfpr.todo.users.UserService;
+import com.utfpr.todo.clean.application.usecase.create_user.CreateUser;
+import com.utfpr.todo.clean.infra.api.controller.UserController;
+import com.utfpr.todo.clean.infra.api.mapper.UserMapper;
+import com.utfpr.todo.clean.infra.model.UserModel;
+import com.utfpr.todo.clean.infra.repository.UserModelJpaRepository;
 
 @WebMvcTest(UserController.class)
 public class UserControllerTest {
@@ -28,10 +27,10 @@ public class UserControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  private UserService userService;
+  private UserModelJpaRepository userRepository;
 
   @MockBean
-  private UserRepository userRepository;
+  private CreateUser createUser;
 
   @MockBean
   private UserMapper userMapper;
@@ -42,14 +41,14 @@ public class UserControllerTest {
   @Test
   public void createTask_WithDataValid_ReturnsCreated() throws JsonProcessingException, Exception {
 
-    Mockito.when(userService.save(any(UserModel.class))).thenReturn(UserConstants.CREATED_USER);
+    Mockito.when(createUser.execute(UserConstants.CREATE_USER_COMMAND)).thenReturn(UserConstants.CREATE_USER_OUTPUT);
 
     Mockito.when(userRepository.save(any(UserModel.class))).thenReturn(UserConstants.CREATED_USER);
 
     Mockito.when(userMapper.fromModel(UserConstants.CREATED_USER)).thenReturn(UserConstants.USER_OUTPUT_DTO);
 
     mockMvc.perform(
-        post("/users")
+        post("/createUser")
             .contentType("application/json")
             .content(objectMapper.writeValueAsString(UserConstants.USER_INPUT_DTO)))
         .andExpect(status().isCreated())

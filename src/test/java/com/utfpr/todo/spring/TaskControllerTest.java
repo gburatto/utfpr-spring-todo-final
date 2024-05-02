@@ -16,8 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.utfpr.todo.clean.application.usecase.complete_task.CompleteTask;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTask;
 import com.utfpr.todo.clean.infra.api.controller.TaskController;
-import com.utfpr.todo.users.UserConstants;
-import com.utfpr.todo.users.UserRepository;
+import com.utfpr.todo.clean.infra.repository.UserModelJpaRepository;
 
 @WebMvcTest(TaskController.class)
 public class TaskControllerTest {
@@ -26,7 +25,7 @@ public class TaskControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  private UserRepository userRepository;
+  private UserModelJpaRepository userRepository;
 
   @MockBean
   private CreateTask createTask;

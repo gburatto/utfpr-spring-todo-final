@@ -1,6 +1,10 @@
-package com.utfpr.todo.users;
+package com.utfpr.todo.clean.infra.api.mapper;
 
 import org.springframework.stereotype.Component;
+
+import com.utfpr.todo.clean.infra.api.input.UserInputDTO;
+import com.utfpr.todo.clean.infra.api.output.UserOutputDTO;
+import com.utfpr.todo.clean.infra.model.UserModel;
 
 @Component
 public class UserMapper {

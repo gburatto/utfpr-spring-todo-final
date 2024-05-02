@@ -8,7 +8,6 @@ import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskOutput;
 import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
 import com.utfpr.todo.clean.infra.api.output.TaskOutputDTO;
 import com.utfpr.todo.clean.infra.model.TaskModel;
-import com.utfpr.todo.users.UserConstants;
 
 public class TaskConstants {
 

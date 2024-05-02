@@ -17,7 +17,7 @@ public class Email {
             throw new ValidationException("Email must have at least 10 characters");
         }
         if (!email.contains("@") || !email.contains(".")) {
-            throw new ValidationException("Email must contain \"@\" and \".\"");
+            throw new ValidationException("Email must contain '@' and '.'");
         }
     }
     

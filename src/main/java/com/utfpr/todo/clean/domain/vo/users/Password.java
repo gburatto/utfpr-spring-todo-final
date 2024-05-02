@@ -2,6 +2,8 @@ package com.utfpr.todo.clean.domain.vo.users;
 
 import com.utfpr.todo.exceptions.ValidationException;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 // value object
 public class Password {
     
@@ -9,7 +11,9 @@ public class Password {
 
     public Password(String value) {
         this.isInvalidPassword(value);
-        this.value = value;
+
+        String hashedValue = BCrypt.withDefaults().hashToString(12, value.toCharArray());
+        this.value = hashedValue;
     }
 
     private void isInvalidPassword(String password) {

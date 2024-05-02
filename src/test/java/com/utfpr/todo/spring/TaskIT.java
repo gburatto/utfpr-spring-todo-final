@@ -13,8 +13,7 @@ import org.springframework.http.ResponseEntity;
 
 import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
 import com.utfpr.todo.clean.infra.model.TaskModel;
-import com.utfpr.todo.users.UserConstants;
-import com.utfpr.todo.users.UserModel;
+import com.utfpr.todo.clean.infra.model.UserModel;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class TaskIT {
@@ -27,7 +26,7 @@ public class TaskIT {
 
     // given / arrange
 
-    ResponseEntity<UserModel> createUserResponse = restTemplate.postForEntity("/users", UserConstants.USER_INPUT_DTO, UserModel.class);
+    ResponseEntity<UserModel> createUserResponse = restTemplate.postForEntity("/createUser", UserConstants.USER_INPUT_DTO, UserModel.class);
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Authorization", UserConstants.AUTH_HEADER);
@@ -56,7 +55,7 @@ public class TaskIT {
 
     // given / arrange
 
-    restTemplate.postForEntity("/users", UserConstants.USER_INPUT_DTO, UserModel.class);
+    restTemplate.postForEntity("/createUser", UserConstants.USER_INPUT_DTO, UserModel.class);
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Authorization", UserConstants.AUTH_HEADER);

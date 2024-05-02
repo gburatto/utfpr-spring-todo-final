@@ -22,5 +22,10 @@ public class UserMemoryGateway implements UserGateway {
         return users.get(id);
     }
 
+    @Override
+    public User findByUsername(String username) {
+        return users.get(username);
+    }
+
     
 }

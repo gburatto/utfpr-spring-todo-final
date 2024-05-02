@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.utfpr.todo.users.UserModel;
-import com.utfpr.todo.users.UserRepository;
+import com.utfpr.todo.clean.infra.model.UserModel;
+import com.utfpr.todo.clean.infra.repository.UserModelJpaRepository;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import jakarta.servlet.FilterChain;
@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AuthFilter extends OncePerRequestFilter {
     
     @Autowired
-    private UserRepository userRepository;
+    private UserModelJpaRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -32,14 +32,14 @@ public class AuthFilter extends OncePerRequestFilter {
             path = request.getServletPath();
         }
 
-        if (path.equals("/users")) {
+        if (path.equals("/createUser")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         String authorization = request.getHeader("Authorization");
 
-        System.out.println(authorization);
+        //System.out.println(authorization);
 
         if (authorization == null || !authorization.startsWith("Basic")) {
             response.setStatus(401);
@@ -54,15 +54,15 @@ public class AuthFilter extends OncePerRequestFilter {
 
         String decodedToken = new String(decoder.decode(token));
 
-        System.out.println(decodedToken);
+        //System.out.println(decodedToken);
 
         String[] parts = decodedToken.split(":");
 
         String username = parts[0];
         String password = parts[1];
 
-        System.out.println(username);
-        System.out.println(password);
+        //System.out.println(username);
+        //System.out.println(password);
 
         UserModel user = userRepository.findByUsername(username);
 

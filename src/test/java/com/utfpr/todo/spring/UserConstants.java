@@ -1,7 +1,12 @@
-package com.utfpr.todo.users;
+package com.utfpr.todo.spring;
 
 import java.util.Base64;
 import java.util.UUID;
+
+import com.utfpr.todo.clean.application.usecase.create_user.CreateUserCommand;
+import com.utfpr.todo.clean.application.usecase.create_user.CreateUserOutput;
+import com.utfpr.todo.clean.infra.api.output.UserOutputDTO;
+import com.utfpr.todo.clean.infra.model.UserModel;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
@@ -41,6 +46,20 @@ public class UserConstants {
         .name(NAME)
         .username(USERNAME)
         .password(HASHED_PASSWORD)
+        .build();
+
+    public static final CreateUserCommand CREATE_USER_COMMAND = CreateUserCommand.builder()
+        .name(NAME)
+        .email(EMAIL)
+        .username(USERNAME)
+        .password(PASSWORD)
+        .build();
+
+    public static final CreateUserOutput CREATE_USER_OUTPUT = CreateUserOutput.builder()
+        .id(USER_ID)
+        .name(NAME)
+        .email(EMAIL)
+        .username(USERNAME)
         .build();
 
 }
