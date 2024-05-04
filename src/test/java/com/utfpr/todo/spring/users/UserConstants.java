@@ -1,4 +1,4 @@
-package com.utfpr.todo.spring;
+package com.utfpr.todo.spring.users;
 
 import java.util.Base64;
 import java.util.UUID;
@@ -60,6 +60,15 @@ public class UserConstants {
         .name(NAME)
         .email(EMAIL)
         .username(USERNAME)
+        .build();
+
+    public static final UserModel USER_EMPTY = UserModel.builder().build();
+
+    public static final UserModel USER_INVALID = UserModel.builder()
+        .username("")
+        .name("")
+        .email("")
+        .password("")
         .build();
 
 }

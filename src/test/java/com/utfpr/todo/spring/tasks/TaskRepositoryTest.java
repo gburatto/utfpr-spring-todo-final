@@ -1,4 +1,4 @@
-package com.utfpr.todo.spring;
+package com.utfpr.todo.spring.tasks;
 
 import java.time.format.DateTimeFormatter;
 

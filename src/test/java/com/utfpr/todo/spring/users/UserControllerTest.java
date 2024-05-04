@@ -1,4 +1,4 @@
-package com.utfpr.todo.spring;
+package com.utfpr.todo.spring.users;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

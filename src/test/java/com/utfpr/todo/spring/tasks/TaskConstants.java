@@ -1,4 +1,4 @@
-package com.utfpr.todo.spring;
+package com.utfpr.todo.spring.tasks;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,6 +8,7 @@ import com.utfpr.todo.clean.application.usecase.create_task.CreateTaskOutput;
 import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
 import com.utfpr.todo.clean.infra.api.output.TaskOutputDTO;
 import com.utfpr.todo.clean.infra.model.TaskModel;
+import com.utfpr.todo.spring.users.UserConstants;
 
 public class TaskConstants {
 

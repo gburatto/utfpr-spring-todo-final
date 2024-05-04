@@ -81,4 +81,51 @@ public class TaskTest {
 
     }
 
+    @Test
+    public void completeTask_NotYetCompleted_ShouldCompleteTask() {
+
+        // Arrange
+        String userId = UUID.randomUUID().toString();
+        String title = "Task Title";
+        String description = "Task Description";
+        String priority = "high";
+        LocalDateTime startAt = LocalDateTime.now().plusDays(1);
+        LocalDateTime endAt = LocalDateTime.now().plusDays(2);
+        Task task = Task.create(userId, title, description, priority, startAt, endAt);
+
+        boolean expectedCompletedBefore = false;
+        boolean completedBefore = task.isCompleted();
+        boolean expectedCompletedAfter = true;
+
+        // Act
+        task.complete();
+        
+        // Assert
+        assertEquals(expectedCompletedAfter, task.isCompleted());
+        assertEquals(expectedCompletedBefore, completedBefore);
+
+    }
+
+    @Test
+    public void completeTask_AlreadyCompleted_ThrowsException() {
+
+        // Arrange
+        String userId = UUID.randomUUID().toString();
+        String title = "Task Title";
+        String description = "Task Description";
+        String priority = "high";
+        LocalDateTime startAt = LocalDateTime.now().plusDays(1);
+        LocalDateTime endAt = LocalDateTime.now().plusDays(2);
+        String message = "Task is already completed";
+        Task task = Task.create(userId, title, description, priority, startAt, endAt);
+        task.complete();
+
+        // Act / Assert
+        ValidationException exception = assertThrows(ValidationException.class, () -> {
+            task.complete();
+        });
+        assertEquals(message, exception.getMessage());
+
+    }
+
 }

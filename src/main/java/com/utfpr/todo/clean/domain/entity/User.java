@@ -7,7 +7,6 @@ import com.utfpr.todo.clean.domain.vo.users.Name;
 import com.utfpr.todo.clean.domain.vo.users.Password;
 import com.utfpr.todo.clean.domain.vo.users.Username;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import lombok.Getter;
 
 // entity

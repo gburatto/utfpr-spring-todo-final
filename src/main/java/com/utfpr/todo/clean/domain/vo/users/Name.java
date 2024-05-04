@@ -17,13 +17,17 @@ public class Name {
 
     private void isInvalidName(String name) {
 
+        if (name == null) {
+            throw new ValidationException("Name must not be null");
+        }
+        
         Pattern numbers = Pattern.compile("[0-9]");
         Pattern symbols = Pattern.compile("[\\/!@#$%&*()_+=|<>?{},;:\\[\\]~^§¹²³£¢¬°\"]");
         Matcher hasNumber = numbers.matcher(name);
         Matcher hadSymbol = symbols.matcher(name);
 
-        if (name == null || hasNumber.find() || hadSymbol.find()) {
-            throw new ValidationException("Name must not be null and cannot contain numbers or symbols");
+        if (hasNumber.find() || hadSymbol.find()) {
+            throw new ValidationException("Name cannot contain numbers or symbols");
         }
     }
     

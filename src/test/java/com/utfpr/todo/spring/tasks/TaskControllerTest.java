@@ -1,4 +1,4 @@
-package com.utfpr.todo.spring;
+package com.utfpr.todo.spring.tasks;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -17,6 +17,7 @@ import com.utfpr.todo.clean.application.usecase.complete_task.CompleteTask;
 import com.utfpr.todo.clean.application.usecase.create_task.CreateTask;
 import com.utfpr.todo.clean.infra.api.controller.TaskController;
 import com.utfpr.todo.clean.infra.repository.UserModelJpaRepository;
+import com.utfpr.todo.spring.users.UserConstants;
 
 @WebMvcTest(TaskController.class)
 public class TaskControllerTest {

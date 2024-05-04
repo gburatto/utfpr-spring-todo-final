@@ -1,4 +1,4 @@
-package com.utfpr.todo.spring;
+package com.utfpr.todo.spring.tasks;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import com.utfpr.todo.clean.infra.api.input.TaskInputDTO;
 import com.utfpr.todo.clean.infra.model.TaskModel;
 import com.utfpr.todo.clean.infra.model.UserModel;
+import com.utfpr.todo.spring.users.UserConstants;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class TaskIT {

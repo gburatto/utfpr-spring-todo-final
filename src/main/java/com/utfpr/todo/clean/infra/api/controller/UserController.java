@@ -12,7 +12,6 @@ import com.utfpr.todo.clean.application.usecase.create_user.CreateUser;
 import com.utfpr.todo.clean.application.usecase.create_user.CreateUserCommand;
 import com.utfpr.todo.clean.application.usecase.create_user.CreateUserOutput;
 import com.utfpr.todo.clean.infra.api.input.UserInputDTO;
-import com.utfpr.todo.clean.infra.api.mapper.UserMapper;
 import com.utfpr.todo.clean.infra.api.output.UserOutputDTO;
 
 import jakarta.validation.Valid;
@@ -23,9 +22,6 @@ public class UserController {
 
   @Autowired
   private CreateUser createUser;
-
-  @Autowired
-  private UserMapper userMapper;
 
   @PostMapping("/createUser")
   public ResponseEntity<UserOutputDTO> create(@RequestBody @Valid UserInputDTO userInput) {
